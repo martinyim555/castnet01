@@ -1,0 +1,110 @@
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>My First HTML </title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+       
+        body {
+            background-color: #BED1EC;
+            font-size: 15PX;
+            font-family: ‘cwTeXYen’, sans-serif;
+
+        }
+
+        h1 {
+            color: black;
+            text-align: left;
+            font-size: 50px;
+            text-align: center;
+            font-family: "‘cwTeXYen’, sans-serif";
+        }
+
+        h3 {
+            color: black;
+            text-align: left;
+            font-size: 30px;
+            text-align: center;
+            font-family: ‘cwTeXYen’, sans-serif;
+        }
+
+        p {
+            font-family: monospace;
+            font-size: 30px;
+            color: black;
+            text-align: center;
+            font-family: ‘cwTeXYen’, sans-serif;
+        }
+        div{
+            font-size: 40px;
+            font-family: monospace;
+            text-align: center;
+            border-radius: 8px;
+            font-weight: bold;
+            margin: 4px 7px;
+            font-family: ‘cwTeXYen’, sans-serif;
+            
+           
+        }
+        input{
+            font-size: 40px;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            border: 2px solid darkslateblue;
+            text-align: center;
+            border-radius: 8px;
+            margin: 4px 7px;
+            font-weight: 1100;
+            background-color:rgb(198, 255, 196);
+        }
+    </style>
+</head>
+<body>
+<h1> 請輸入你的類型、身高及體重</h1>
+<h3>輕度運動者類型請輸入1/中度輸入2/重度輸入3</h3>
+<div id="app">
+    類型：<input type="number" v-model="Lala" placeholder="請輸入您的類型"><br>
+    身高：<input type="number" v-model="height" placeholder="請輸入您的身高(公分)"><br>
+    體重：<input type="number" v-model="weight" placeholder="請輸入您的體重(公斤)"><br>
+    <div> {{output}} </div>
+    <input type="button" value="計算結果" @click="bmi"/>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            weight: null,
+            height: null,
+            output: 'BMI與一日所需熱量計算結果(大卡)'
+        },
+        methods:  {
+            bmi: function (event) {
+                var bmi = 0;
+                var weight = Number(this.weight);
+                var height = Number(this.height) / 100;
+                var Lala = Number(this.Lala);
+                bmi = weight / (height * height);
+                console.log(bmi);
+                if(bmi<18.5&&Lala==1)
+                this.output = "過輕/每日所需"+35*weight+"大卡";
+                else if(bmi<18.5&&Lala==2)
+                this.output = "過輕/每日所需"+40*weight+"大卡";
+                else if(bmi<18.5&&Lala==3)
+                this.output = "過輕/每日所需"+45*weight+"大卡";
+                else if(bmi>18.5&&bmi<24&&Lala==1)
+                this.output =  "正常/每日所需"+30*weight+"大卡";
+                else if(bmi>18.5&&bmi<24&&Lala==2)
+                this.output = "正常/每日所需"+35*weight+"大卡";
+                else if(bmi>18.5&&bmi<24&&Lala==3)
+                this.output = "正常/每日所需"+40*weight+"大卡";
+                else if(bmi>24&&Lala==1)
+                this.output = "過重/每日所需"+25*weight+"大卡";
+                else if(bmi>24&&Lala==2)
+                this.output = "過重/每日所需"+30*weight+"大卡";
+                else this.output = "過重/每日所需"+35*weight+"大卡";
+                // document.getElementById("#output").innerHTML = bmi;
+                // return bmi || 0;
+            }
+        }
+    })
+</script>　
+</body>
+</html>
